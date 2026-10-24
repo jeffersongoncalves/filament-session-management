@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\HtmlString;
 use JeffersonGoncalves\Filament\SessionManagement\Resources\Sessions\Pages\ListSessions;
+use JeffersonGoncalves\Filament\SessionManagement\Resources\Sessions\Pages\ViewSession;
 use JeffersonGoncalves\Filament\SessionManagement\Support\Utils;
 use JeffersonGoncalves\SessionManagement\Facades\SessionManagement;
 use JeffersonGoncalves\SessionManagement\Models\Session;
@@ -30,6 +31,7 @@ class SessionResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
+            ->columns(1)
             ->schema([
                 Section::make()
                     ->columns(2)
@@ -163,9 +165,9 @@ class SessionResource extends Resource
 
     public static function getPages(): array
     {
-        // ponytail: no view page, the modal keeps session ids out of URLs and browser history.
         return [
             'index' => ListSessions::route('/'),
+            'view' => ViewSession::route('/{record}'),
         ];
     }
 

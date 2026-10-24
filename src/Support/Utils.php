@@ -57,6 +57,6 @@ class Utils
             JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PARTIAL_OUTPUT_ON_ERROR,
         );
 
-        return new HtmlString('<pre style="white-space: pre-wrap; word-break: break-all;">'.e($json).'</pre>');
+        return new HtmlString('<pre style="white-space: pre-wrap; overflow-wrap: anywhere;">'.e($json).'</pre>');
     }
 }

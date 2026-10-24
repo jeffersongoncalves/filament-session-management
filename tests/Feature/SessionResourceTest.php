@@ -1,6 +1,7 @@
 <?php
 
 use JeffersonGoncalves\Filament\SessionManagement\Resources\Sessions\Pages\ListSessions;
+use JeffersonGoncalves\Filament\SessionManagement\Resources\Sessions\Pages\ViewSession;
 use JeffersonGoncalves\Filament\SessionManagement\Resources\Sessions\SessionResource;
 use JeffersonGoncalves\Filament\SessionManagement\Tests\Fixtures\TestUser;
 use JeffersonGoncalves\SessionManagement\Facades\SessionManagement;
@@ -30,8 +31,8 @@ it('renders the list page and lists sessions with their user', function () {
 it('shows the decoded payload with sensitive keys masked', function () {
     $session = makeSession(['_token' => 'csrf-secret', 'locale' => 'pt_BR'], userId: 1);
 
-    Livewire::test(ListSessions::class)
-        ->mountTableAction('view', $session)
+    Livewire::test(ViewSession::class, ['record' => $session->getKey()])
+        ->assertSuccessful()
         ->assertSeeHtml('&quot;locale&quot;: &quot;pt_BR&quot;')
         ->assertSee('********')
         ->assertDontSee('csrf-secret');
@@ -110,7 +111,7 @@ it('is read-only and counts active sessions in the badge', function () {
     makeSession();
     makeSession(minutesAgo: 500);
 
-    expect(SessionResource::getPages())->toHaveKeys(['index'])->not->toHaveKey('create')
+    expect(SessionResource::getPages())->toHaveKeys(['index', 'view'])->not->toHaveKey('create')
         ->and(SessionResource::canCreate())->toBeFalse()
         ->and(SessionResource::getNavigationBadge())->toBe('1')
         ->and(Session::query()->count())->toBe(2);
