@@ -12,7 +12,6 @@
     ],
     "homepage": "https://github.com/jeffersongoncalves/filament-session-management",
     "license": "MIT",
-    "type": "library",
     "authors": [
         {
             "name": "Jefferson Gonçalves",
@@ -22,42 +21,45 @@
     ],
     "require": {
         "php": "^8.2",
-        "filament/filament": "^5.0",
-        "spatie/laravel-package-tools": "^1.16",
-        "jeffersongoncalves/laravel-session-management": "^1.0"
+        "filament/filament": "^5.3",
+        "jeffersongoncalves/filament-plugin-core": "^3.0",
+        "jeffersongoncalves/laravel-session-management": "^1.0",
+        "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.0",
         "orchestra/testbench": "^10.0|^11.0",
         "pestphp/pest": "^3.0|^4.0",
-        "larastan/larastan": "^2.0|^3.0",
-        "laravel/pint": "^1.0"
+        "pestphp/pest-plugin-laravel": "^3.0|^4.0"
     },
     "autoload": {
         "psr-4": {
-            "JeffersonGoncalves\\Filament\\SessionManagement\\": "src/"
+            "JeffersonGoncalves\\Filament\\SessionManagement\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "JeffersonGoncalves\\Filament\\SessionManagement\\Tests\\": "tests/"
+            "JeffersonGoncalves\\Filament\\SessionManagement\\Tests\\": "tests"
         }
     },
     "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint",
-        "analyse": "vendor/bin/phpstan analyse"
+        "format": "vendor/bin/pint"
     },
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "JeffersonGoncalves\\Filament\\SessionManagement\\SessionManagementServiceProvider"
+                "JeffersonGoncalves\\Filament\\SessionManagement\\FilamentSessionManagementServiceProvider"
             ]
         }
     },
