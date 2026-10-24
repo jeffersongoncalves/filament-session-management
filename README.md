@@ -20,7 +20,7 @@ A Filament plugin to read and manage Laravel's database sessions from your panel
 
 - 👥 Sessions table with user, IP address, user agent, last activity and an Active / Expired / Current badge
 - 🔎 Filters by status (active / expired) and by authenticated vs guest sessions
-- 🧾 View modal with the decoded payload as pretty JSON (CSRF token and password hashes masked, objects never instantiated)
+- 🧾 View page with the decoded payload as pretty JSON (CSRF token and password hashes masked, objects never instantiated)
 - 🚪 Revoke a session, or many in bulk; your own current session is always kept
 - 🧹 "Prune expired" header action
 - 🔢 Navigation badge with the number of active sessions
